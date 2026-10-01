@@ -1,0 +1,33 @@
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+   
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    
+    - name: Set up JDK 
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin' # Options: temurin, zulu, liberica, adopt
+        cache: 'maven'           # Caches ~/.m2 dependencies to speed up future runs
+
+    # Step 3: Build and test with Maven
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    # Step 4: (Optional) Upload the compiled JAR/WAR artifact
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: java-app-package
+        path: target/*.jar
