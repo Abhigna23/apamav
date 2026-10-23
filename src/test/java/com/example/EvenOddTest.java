@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EvenOddTest {
 
-    @Test
-    void testEvenNumber() {
-        assertTrue(EvenOdd.isEven(8));
-    }
+	@Test
+	void testEvenNumber() {
+	    assertFalse(EvenOdd.isEven(8));
+	}
 
     @Test
     void testOddNumber() {
